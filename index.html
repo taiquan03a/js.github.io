@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quản lý nhân viên</title>
+</head>
+<body>
+  <h1>Quản lý nhân viên</h1>
+
+  <label for="soLuongNV">Nhập số lượng nhân viên:</label>
+  <input type="number" id="soLuongNV">
+  <br>
+  <button onclick="taoDanhSachNV()">Tạo danh sách nhân viên</button>
+
+  <div id="danhSachNV"></div>
+
+  <script>
+    class NhanVien {
+      constructor(maNV, hoTen, ngaySinh, phongBan, heSoLuong) {
+        this.maNV = maNV;
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.phongBan = phongBan;
+        this.heSoLuong = heSoLuong;
+      }
+
+      capNhatMaNV(maNV) {
+        this.maNV = maNV;
+      }
+
+      capNhatHoTen(hoTen) {
+        this.hoTen = hoTen;
+      }
+
+      capNhatNgaySinh(ngaySinh) {
+        this.ngaySinh = ngaySinh;
+      }
+
+      capNhatPhongBan(phongBan) {
+        this.phongBan = phongBan;
+      }
+
+      capNhatHeSoLuong(heSoLuong) {
+        this.heSoLuong = heSoLuong;
+      }
+
+      hienThiThongTin() {
+        return `<strong>Mã NV:</strong> ${this.maNV}<br>
+                <strong>Họ và tên:</strong> ${this.hoTen}<br>
+                <strong>Ngày sinh:</strong> ${this.ngaySinh}<br>
+                <strong>Phòng ban:</strong> ${this.phongBan}<br>
+                <strong>Hệ số lương:</strong> ${this.heSoLuong}<br>
+                <hr>`;
+      }
+    }
+
+    function taoDanhSachNV() {
+      let soLuongNV = parseInt(document.getElementById('soLuongNV').value);
+      let danhSachNV = [];
+
+      for (let i = 0; i < soLuongNV; i++) {
+        let maNV = prompt('Nhập mã nhân viên:');
+        let hoTen = prompt('Nhập họ và tên:');
+        let ngaySinh = prompt('Nhập ngày tháng năm sinh:');
+        let phongBan = prompt('Nhập phòng ban:');
+        let heSoLuong = parseFloat(prompt('Nhập hệ số lương:'));
+
+        let nhanVien = new NhanVien(maNV, hoTen, ngaySinh, phongBan, heSoLuong);
+        danhSachNV.push(nhanVien);
+      }
+
+      let danhSachNVHtml = '';
+      danhSachNV.forEach((nhanVien) => {
+        danhSachNVHtml += nhanVien.hienThiThongTin();
+      });
+
+      document.getElementById('danhSachNV').innerHTML = danhSachNVHtml;
+    }
+  </script>
+</body>
+</html>
